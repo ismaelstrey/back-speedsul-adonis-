@@ -21,18 +21,27 @@ services:
       - '${DB_PORT}:${DB_PORT}' 
     networks:
       - speed-network
+    volumes:
+      - pgadmin:/root/.pgadmin
+    restart: unless-stopped
       
   pgadmin:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - pgadmin:/root/.pgadmin
     ports:
       - "80:80"
     depends_on:
       - db
     networks:
       - speed-network
+    restart: unless-stopped
 
 networks: 
   speed-network:
+volumes:
+  postgres:
+  pgadmin:
