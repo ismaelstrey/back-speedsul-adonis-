@@ -18,8 +18,10 @@ const Route = use('Route')
 
 Route.post('/register', 'AuthController.register')
 Route.post('/authenticate', 'AuthController.authenticate')
-Route.get('/app', 'AppController.index').middleware(['auth'])
-
+Route.get('images/:path', 'ImageController.show')
 Route.group(() => {
+  Route.get('/app', 'AppController.index')
+  Route.post('properties/:id/images', 'ImageController.store')
   Route.resource("tweets", "TweetController").apiOnly().except('update')
+  Route.resource('properties', 'PropertyController').apiOnly()
 }).middleware(['auth'])

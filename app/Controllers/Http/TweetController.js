@@ -40,7 +40,7 @@ class TweetController {
    * Display a single tweet.
    * GET tweets/:id
    */
-  async show ({ params}) {
+  async show ({ params }) {
     const tweet = await Tweet.findOrFail(params.id)
     return tweet
   }
