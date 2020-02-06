@@ -1,8 +1,9 @@
 FROM node:10.13-alpine
-WORKDIR /usr/src/app
+ENV NODE_ENV production
+WORKDIR /app
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm i -g @adonisjs/cli
+RUN npm i -g @adonisjs/cli nodemon
 RUN yarn
 COPY . .
 EXPOSE 3333
-CMD yarn serve
+CMD [ "yarn", "start" ]
